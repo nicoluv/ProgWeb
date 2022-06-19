@@ -1,13 +1,17 @@
 plugins {
     id 'java'
     id 'application'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 mainClassName = 'Main'
 
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+run{
+    standardInput(System.in)
+}
 
 repositories {
     mavenCentral()
