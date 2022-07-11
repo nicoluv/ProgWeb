@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/plantilla.html::head">
+  <meta charset="UTF-8">
+  <title th:text="${titulo}">CRUD - Productos</title>
+
+  <nav th:replace="/plantilla.html::nav"></nav>
+</head>
+<body>
+<div class="container">
+  <div class="row mt-5">
+
+    <div class="col-12">
+      <h1 align="center">CRUD de Productos</h1>
+    </div>
+
+    <div class="col-12 mt-4">
+      <a th:href="'/nuevoProducto'" class="btn btn-primary">Crear Producto</a>
+    </div>
+
+    <div class="col-12 mt-2">
+      <table class="table-border table">
+        <thead class="table-dark">
+        <tr>
+          <th scope="col">Producto</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Acci&oacuten</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="producto : ${productos}">
+          <td style="width: 40%" th:text="${producto.nombre}">Nombre del producto</td>
+          <td style="width: 22%" th:text="${producto.precio}+'$'">Precio del producto</td>
+          <td style="width: auto">
+            <a class="btn btn-primary" th:href="'nuevoProducto/'+${producto.id}">Editar</a>
+            <a class="btn btn-danger" th:href="'eliminar/'+${producto.id}">Eliminar</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div th:if="${productos.size()} <= 0" class="col-12 mt-5">
+        <h4 style="text-align: center; font-style: italic">No hay productos creados.</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="/plantilla.html::scripts"></div>
+</body>
+</html>
