@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/plantilla.html::head">
+  <meta charset="UTF-8">
+  <title th:text="${titulo}">Comprar</title>
+
+  <nav th:replace="/plantilla.html::nav"></nav>
+</head>
+<body>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h1 align="center">Listado de Productos</h1>
+    </div>
+  </div>
+
+  <div class="col mt-5">
+    <table class="table-border table">
+      <thead class="table-dark">
+      <tr>
+        <th scope="col">Producto</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Acci&oacuten</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="producto : ${productos}">
+        <td th:text="${producto.nombre}">Nombre del producto</td>
+        <td th:text="${producto.precio}+'$'">Precio del producto</td>
+        <form method="post" th:action="'/comprar/'+${producto.id}">
+          <td><input id="cant" name="cant" class="form-control" type="number" value="1" min="1"></td>
+          <td>
+            <button class="btn btn-primary" type="submit">Agregar</button>
+            <a class="btn btn-success" th:href="'comprar/detalles/'+${producto.id}">Ver detalles</a>
+          </td>
+        </form>
+      </tr>
+      </tbody>
+    </table>
+
+    <div th:if="${productos.size()} <= 0" class="col-12 mt-5">
+      <h4 style="text-align: center; font-style: italic">No hay productos disponibles.</h4>
+    </div>
+
+    <div th:fragment="pager">
+      <ul class="pagination">
+        <th:block th:each="pageNumber : ${body}">
+          <li th:if="${pageNumber} == 1" class="page-item">
+            <a class="page-link" th:href="${url} + '?page='+ 1" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item active" th:if="${pageNumber} == ${pagina}">
+            <a class="page-link" th:text="${pageNumber}" href="#"></a>
+          </li>
+          <li class="page-item disabled" th:if="${pageNumber} == -1">
+            <a class="page-link" href="#">...</a>
+          </li>
+          <li class="page-item" th:if="${pageNumber} != -1 and ${pageNumber} != ${pagina}">
+            <a class="page-link" th:text="${pageNumber}" th:href="${url} + '?page='+ ${pageNumber}"></a>
+          </li>
+          <li th:if="${pageNumber == body.length}" class="page-item"  aria-label="Next">
+            <a class="page-link" th:href="${url} + '?page='+ ${pagina + 1}">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </th:block>
+      </ul>
+    </div>
+
+  </div>
+</div>
+<div th:replace="/plantilla.html::scripts"></div>
+</body>
+</html>

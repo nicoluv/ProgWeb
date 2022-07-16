@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="MiUnidadPersistencia" transaction-type="RESOURCE_LOCAL">
+        <class>modelos.Producto</class>
+        <class>modelos.Usuario</class>
+        <class>modelos.CarroCompra</class>
+        <class>modelos.VentasProductos</class>
+        <class>modelos.Foto</class>
+        <class>modelos.ProdVentas</class>
+        <class>modelos.Comentario</class>
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/tiendaWeb" />
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="jakarta.persistence.jdbc.user" value="sa" />
+            <property name="jakarta.persistence.jdbc.password" value="" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="create-drop"/>
+        </properties>
+    </persistence-unit>
+</persistence>
