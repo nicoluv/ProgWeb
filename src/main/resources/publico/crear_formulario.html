@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/plantilla.html::head">
+  <meta charset="UTF-8">
+  <title>Crear Formulario</title>
+  <nav th:replace="/plantilla.html::nav"></nav>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col mt-5">
+      <h1 align="center">Crear Formulario</h1>
+    </div>
+
+    <div class="col-md-12 mt-4">
+      <div class="card center">
+        <h5 class="card-header">Crear Formulario</h5>
+        <div class="card-body">
+          <button type="button" class="btn btn-success" onclick="subirServidor()">Subir a Servidor</button>
+          <form method="post">
+
+            <div class="row">
+              <div class="col-md-12 mb-2">
+                <label for="nombre">Nombre de Cliente </label>
+                <input id="nombre" name="nombre" type="text" class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 mb-2">
+                <label for="n_grado">Nivel Grado</label>
+                <select id="n_grado" name="n_grado" type="text" class="form-control">
+                  <option value="Basico">Basico</option>
+                  <option value="Medio">Medio</option>
+                  <option value="Universitario">Universitario</option>
+                  <option value="Postgrado">Postgrado</option>
+                  <option value="Doctorado">Doctorado</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 mb-2">
+                <label for="sector">Sector</label>
+                <input id="sector" name="sector" type="text" class="form-control">
+              </div>
+            </div>
+
+            <button onclick="crearFormulario()" type="button" class="btn btn-success">Crear</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script text="text/javascript">
+  var worker = new Worker("/publico/js/webworker.js");
+  var la = null;
+  var lo = null;
+  var options={
+    enableHighAccuracy:true,
+    timeout:5000,
+    maximumAge:0
+  };
+
+  function crearFormulario(){
+    var lista = localStorage.getItem("InfinityTrain");
+    navigator.geolocation.getCurrentPosition(success,error,options);
+
+    if(lista === null){
+      var lista = []
+    }
+    else{
+      var l = JSON.parse(lista);
+    }
+
+    var json = generarJson();
+
+    if(json !== null){
+      l.push(json);
+    }
+
+    localStorage.setItem("InfinityTrain",JSON.stringify(l))
+
+    console.log(localStorage.getItem("InfinityTrain"));
+  }
+
+  function subirServidor(){
+      worker.postMessage(localStorage.getItem("InfinityTrain"))
+  }
+
+  function success(pos){
+    var crd=pos.coords;
+    la=crd.latitude;
+    lo=crd.longitude;
+  };
+
+  function error(err){
+    console.warn('ERROR('+err.code+'):'+err.message);
+  };
+
+  function generarJson(){
+      var dict = {};
+
+      dict.nombre = $("#nombre").val();
+      dict.n_grado = $("#n_grado").val();
+      dict.sector = $("#sector").val();
+      dict.latitud = la;
+      dict.longitud = lo;
+
+      if(dict.nombre === '' || dict.n_grado === '' || dict.sector === '') {
+         return null
+      }
+
+      return dict
+  }
+
+</script>
+
+<div th:replace="/plantilla.html::scripts"></div>
+</body>
+</html>

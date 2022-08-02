@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/plantilla.html::head">
+  <meta charset="UTF-8">
+  <title th:text="${titulo}">CRUD - Formularios</title>
+
+  <nav th:replace="/plantilla.html::nav"></nav>
+</head>
+<body>
+<div class="container">
+  <div class="row mt-5">
+
+    <div class="col-12">
+      <h1 align="center">CRUD de Formularios</h1>
+    </div>
+
+    <div class="col-12 mt-4">
+      <a th:href="'/nuevoFormulario'" class="btn btn-primary">Crear Formulario</a>
+    </div>
+
+    <div class="col-12 mt-2">
+      <table class="table-border table">
+        <thead class="table-dark">
+        <tr>
+          <th scope="col">Formulario</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Sector</th>
+          <th scope="col">nivelEscolar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="formulario : ${formularios}">
+          <td style="width: 40%" th:text="${formulario.nombre}">Nombre </td>
+          <td style="width: 22%" th:text="${formulario.sector}+'$'">Sector</td>
+          <td style="width: 12%" th:text="${formulario.nivelEscolar}+'$'">Sector</td>
+          <td style="width: auto">
+            <a class="btn btn-primary" th:href="'nuevoFormulario/'+${formulario.id}">Editar</a>
+            <a class="btn btn-danger" th:href="'eliminar/'+${formulario.id}">Eliminar</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!--<div th:if="${productos.size()} <= 0" class="col-12 mt-5">-->
+        <!--<h4 style="text-align: center; font-style: italic">No hay productos creados.</h4>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="/plantilla.html::scripts"></div>
+</body>
+</html>

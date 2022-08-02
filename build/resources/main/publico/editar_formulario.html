@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/plantilla.html::head">
+  <meta charset="UTF-8">
+  <title>Crear Formulario</title>
+  <nav th:replace="/plantilla.html::nav"></nav>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col mt-5">
+
+
+      <h1 align="center">Editar Formulario</h1>
+    </div>
+
+    <div class="col-md-12 mt-4">
+      <div class="card center">
+        <h5 class="card-header">Editar Formulario</h5>
+        <div class="card-body">
+          <form method="post">
+
+            <div class="row">
+              <div class="col-md-12 mb-2">
+                <label for="nombre">Nombre de Cliente </label>
+                <input id="nombre" name="nombre" type="text" class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 mb-2">
+                <label for="n_grado">Nivel Grado</label>
+                <select id="n_grado" name="n_grado" type="text" class="form-control">
+                  <option value="Basico">Basico</option>
+                  <option value="Medio">Medio</option>
+                  <option value="Universitario">Universitario</option>
+                  <option value="Postgrado">Postgrado</option>
+                  <option value="Doctorado">Doctorado</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 mb-2">
+                <label for="sector">Sector</label>
+                <input id="sector" name="sector" type="text" class="form-control">
+              </div>
+            </div>
+
+            <button onclick="editarFormulario()" type="button" class="btn btn-success">Editar</button>
+            <a href="/formulario/lista" class="btn btn-danger">Atras</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script text="text/javascript">
+
+  $(document).ready(function (){
+    var lista = localStorage.getItem("InfinityTrain");
+    var obj = JSON.parse(lista);
+    var id = [[${id}]]
+
+    $("#nombre").val(obj[id].nombre);
+    $("#n_grado").val(obj[id].n_grado);
+    $("#sector").val(obj[id].sector);
+  });
+
+
+  function editarFormulario(){
+    var lista = localStorage.getItem("InfinityTrain");
+    var dict = JSON.parse(lista);
+    var id = [[${id}]]
+
+    dict[id].nombre = $("#nombre").val();
+    dict[id].n_grado = $("#n_grado").val();
+    dict[id].sector = $("#sector").val();
+
+    localStorage.setItem("InfinityTrain",JSON.stringify(dict))
+    window.open("/formulario/lista")
+  }
+
+
+</script>
+
+<div th:replace="/plantilla.html::scripts"></div>
+</body>
+</html>

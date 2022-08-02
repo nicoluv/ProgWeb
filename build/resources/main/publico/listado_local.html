@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/plantilla.html::head">
+  <meta charset="UTF-8">
+  <title>Listado Local</title>
+
+  <nav th:replace="/plantilla.html::nav"></nav>
+</head>
+<body>
+<div class="container">
+  <div class="row mt-5">
+
+    <div class="col-12">
+      <h1 align="center">Listado Local</h1>
+    </div>
+
+    <div class="col-12 mt-2">
+      <table id="lista" class="table-border table">
+        <thead class="table-dark">
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Nivel Grado</th>
+          <th scope="col">Sector</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function (){
+      //localStorage.setItem("InfinityTrain",JSON.stringify([]))
+      cargar();
+    })
+
+    function cargar(){
+      var lista = localStorage.getItem("InfinityTrain");
+      var obj = JSON.parse(lista);
+      $("#formularios>tbody>tr").remove();
+
+      for(var i = 0;i < obj.length;i++){
+        $("#lista>tbody").append("<tr><td>"+ obj[i].nombre + "</td><td>" + obj[i].n_grado + "</td><td><a href=/formulario/editar?id="+i+" class="+'"btn btn-primary"'+">Editar</a><button onclick="+'"borrar('+i+')"'+" class="+'"btn btn-danger"'+">Borrar</button></td></tr>");
+      }
+    }
+
+    function borrar(form){
+      var json = localStorage.getItem("InfinityTrain");
+      var lista = JSON.parse(json);
+
+      lista.splice(form,1);
+      localStorage.setItem("InfinityTrain",JSON.stringify(lista));
+      window.open("/formulario/lista")
+    }
+</script>
+
+
+<div th:replace="/plantilla.html::scripts"></div>
+</body>
+</html>

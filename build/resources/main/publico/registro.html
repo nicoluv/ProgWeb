@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Inicio de Sesi&oacute;n</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card center-login">
+        <h5 class="card-header text-white bg-dark">Registro de Usuario</h5>
+        <div class="card-body">
+          <form method="post" action="/registrar/confirmar">
+            <label for="usuario">Usuario</label>
+            <input class="form-control" id="usuario" name="usuario" type="text">
+
+            <label for="pass" class="mt-2">Contrase&ntilde;a</label>
+            <input class="form-control" id="pass" name="pass" type="password">
+            <div class="row mx-auto mt-3">
+              <div class="col-6" align="right">
+                <button class="btn btn-primary" type="submit">Registrar</button>
+              </div>
+
+              <div class="col-6">
+                <a class="btn btn-danger" href="/login">Atras</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="/plantilla.html::scripts"></div>
+</body>
+</html>

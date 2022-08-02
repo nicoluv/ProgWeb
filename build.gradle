@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+mainClassName = 'principal.Main'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation "io.javalin:javalin:4.6.0"
+    implementation "org.slf4j:slf4j-simple:1.7.36"
+    implementation group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.12.RELEASE'
+    implementation  'org.jasypt:jasypt:1.9.3'
+    implementation 'com.h2database:h2:1.4.200'
+
+    implementation 'org.hibernate.orm:hibernate-core:6.1.1.Final'
+    implementation 'org.hibernate:hibernate-entitymanager:5.6.10.Final'
+
+    implementation 'org.postgresql:postgresql:42.3.6'
+    implementation 'org.webjars.npm:localforage:1.9.0'
+    implementation 'org.json:json:20201115'
+}
+
+shadowJar{
+    baseName = 'app'
+    classifier = ''
+    archiveVersion = ''
+}
+
+task stage {
+    dependsOn shadowJar
+}
