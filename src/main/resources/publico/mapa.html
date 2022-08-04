@@ -4,14 +4,6 @@
     <meta charset="UTF-8">
     <title>Mapa</title>
     <nav th:replace="/plantilla.html::nav"></nav>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css" type="text/css">
-    <style>
-        .map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"></script
 </head>
 
 <body>
@@ -31,18 +23,22 @@
                     <h2>My Map</h2>
                     <div id="map" class="map"></div>
                     <script type="text/javascript">
-                        var map = new ol.Map({
-                            target: 'map',
-                            layers: [
+                        var opciones = {
+                            target:'map',
+                            layers:[
                                 new ol.layer.Tile({
-                                    source: new ol.source.OSM()
+                                    source:new ol.source.OSM()
                                 })
                             ],
-                            view: new ol.View({
-                                center: ol.proj.fromLonLat([37.41, 8.82]),
-                                zoom: 4
-                            })
-                        });
+                            view:{}
+                        }
+
+                        opciones.view = new ol.View({
+                            center: ol.proj.fromLonLat(["[[${longitud}]]","[[${latitud}]]"]),
+                            zoom:13
+                        })
+
+                        var map = new ol.Map(opciones);
                     </script>
                 </div>
             </div>

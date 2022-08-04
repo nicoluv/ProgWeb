@@ -58,7 +58,7 @@
 </div>
 
 <script text="text/javascript">
-  var worker = new Worker("/publico/js/webworker.js");
+  var worker = new Worker("/js/webworker.js");
   var la = null;
   var lo = null;
   var options={
@@ -67,9 +67,13 @@
     maximumAge:0
   };
 
+  $(document).ready(function (){
+    navigator.geolocation.getCurrentPosition(success,error,options);
+  })
+
   function crearFormulario(){
     var lista = localStorage.getItem("InfinityTrain");
-    navigator.geolocation.getCurrentPosition(success,error,options);
+
 
     if(lista === null){
       var lista = []
@@ -118,6 +122,10 @@
 
       return dict
   }
+
+  worker.onmessage = function (e){
+      localStorage.setItem("InfinityTrain",JSON.stringify([]));
+  };
 
 </script>
 

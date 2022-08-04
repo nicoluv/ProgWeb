@@ -1,6 +1,7 @@
 package controladores;
 
 import io.javalin.Javalin;
+import modelos.Formulario;
 import servicios.FormularioServicio;
 
 import java.util.HashMap;
@@ -34,7 +35,16 @@ public class FormularioControlador {
                 get("/listado",ctx->{
                     HashMap<String,Object> model = new HashMap<String, Object>();
                     model.put("formularios",formularioServicio.findAll());
-                    ctx.render("/publico/listado_servidor.html");
+                    ctx.render("/publico/listado_servidor.html",model);
+                });
+                get("/mapa",ctx->{
+                    String id = ctx.queryParam("id");
+                    HashMap<String,Object> model = new HashMap<String, Object>();
+                    Formulario formulario = formularioServicio.findbyId(id);
+
+                    model.put("latitud",formulario.getUbicacion().getLatitud());
+                    model.put("longitud",formulario.getUbicacion().getLongitud());
+                    ctx.render("/publico/mapa.html",model);
                 });
             });
         });

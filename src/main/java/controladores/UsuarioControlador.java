@@ -71,8 +71,8 @@ public class UsuarioControlador {
             });
         });
 
-        app.get("/cerrar-sesion", ctx -> {
-            ctx.req.getSession().invalidate();
+        app.get("/logout", ctx -> {
+            ctx.cookie("usuario", "",0);
             ctx.redirect("/");
         });
 

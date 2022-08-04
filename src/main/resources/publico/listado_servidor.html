@@ -26,10 +26,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="formulario : ${formularios}">
-          <td style="width: 40%" th:text="${formulario.nombre}">Nombre </td>
-          <td style="width: 12%" th:text="${formulario.nivelEscolar}+'$'">Nivel Escolar</td>
-          <td style="width: 22%" th:text="${formulario.sector}+'$'">Sector</td>
+        <tr th:each="formulario:${formularios}">
+          <td style="width: 40%" th:text="${formulario.getNombre()}">Nombre </td>
+          <td style="width: 12%" th:text="${formulario.getN_grado()}">Nivel Escolar</td>
+          <td style="width: 22%" th:text="${formulario.getSector()}">Sector</td>
           <td style="width: auto">
             <a class="btn btn-primary" th:href="'/servidor/mapa?id='+${formulario.id}">Mapa</a>
           </td>

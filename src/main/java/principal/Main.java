@@ -1,6 +1,7 @@
 package principal;
 import controladores.FormularioControlador;
 import controladores.UsuarioControlador;
+import controladores.WsControlador;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import servicios.DatabaseStarter;
@@ -28,6 +29,7 @@ public class Main {
 
         new UsuarioControlador(app).aplicarRutas();
         new FormularioControlador(app).aplicarRuta();
+        new WsControlador(app).aplicarRuta();
     }
     public static String getConecction(){
         return modoConexion;

@@ -21,6 +21,7 @@
           <th scope="col">Nombre</th>
           <th scope="col">Nivel Grado</th>
           <th scope="col">Sector</th>
+          <th scope="col">Opcion</th>
         </tr>
         </thead>
         <tbody>
@@ -43,7 +44,7 @@
       $("#formularios>tbody>tr").remove();
 
       for(var i = 0;i < obj.length;i++){
-        $("#lista>tbody").append("<tr><td>"+ obj[i].nombre + "</td><td>" + obj[i].n_grado + "</td><td><a href=/formulario/editar?id="+i+" class="+'"btn btn-primary"'+">Editar</a><button onclick="+'"borrar('+i+')"'+" class="+'"btn btn-danger"'+">Borrar</button></td></tr>");
+        $("#lista>tbody").append("<tr><td>"+ obj[i].nombre + "</td><td>" + obj[i].n_grado + "</td><td>" + obj[i].sector + "</td><td><a href=/formulario/editar?id="+i+" class="+'"btn btn-primary"'+">Editar</a><button onclick="+'"borrar('+i+')"'+" class="+'"btn btn-danger"'+">Borrar</button></td></tr>");
       }
     }
 
