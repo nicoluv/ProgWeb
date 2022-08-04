@@ -72,11 +72,11 @@
   })
 
   function crearFormulario(){
-    var lista = localStorage.getItem("InfinityTrain");
+    var lista = localStorage.getItem("dsadsadsa");
 
 
     if(lista === null){
-      var lista = []
+      localStorage.setItem("InfinityTrain",JSON.stringify([]))
     }
     else{
       var l = JSON.parse(lista);
